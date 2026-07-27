@@ -166,7 +166,7 @@ details ul{padding-left:1.2em;margin:6px 0}
     <span class="dayflag" id="dayflag"></span>
   </div>
   <nav>
-    <button data-tab="rec" class="on">きろく</button>
+    <button data-tab="rec" class="on">記録</button>
     <button data-tab="graph">グラフ</button>
     <button data-tab="week">まとめ</button>
   </nav>
@@ -182,13 +182,13 @@ details ul{padding-left:1.2em;margin:6px 0}
   </div>
 </div>
 
-<!-- ============ きろく ============ -->
+<!-- ============ 記録 ============ -->
 <section id="tab-rec">
 
   <!-- 0. 練習の有無 -->
   <div class="card">
-    <h2><span class="step">1</span>きょうは 練習・試合が ある？</h2>
-    <p class="hint">さいしょに えらぼう。えらぶと 入れる欄が 出てくるよ。</p>
+    <h2><span class="step">1</span>今日は 練習・試合が ある？</h2>
+    <p class="hint">最初に選ぼう。選ぶと 入力する欄が 出てきます。</p>
     <div class="toggle" id="ptoggle">
       <button type="button" data-p="1">ある</button>
       <button type="button" data-p="0">ない</button>
@@ -197,11 +197,11 @@ details ul{padding-left:1.2em;margin:6px 0}
 
   <!-- 1. 朝 -->
   <div class="card">
-    <h2><span class="step">2</span>朝 おきたとき <span class="tag">まいにち</span><span class="tag done hide" id="b_m">入力ずみ ✓</span></h2>
-    <p class="hint">トイレのあと・ごはんの前に、いつも同じ条件ではかろう。</p>
+    <h2><span class="step">2</span>朝 起きたとき <span class="tag">毎日</span><span class="tag done hide" id="b_m">入力ずみ ✓</span></h2>
+    <p class="hint">トイレのあと・食事の前に、いつも同じ条件で測ろう。</p>
 
     <div class="field">
-      <div class="lab">おきたときの 体重 <small>kg</small></div>
+      <div class="lab">起きたときの 体重 <small>kg</small></div>
       <div class="numrow">
         <input type="number" step="0.1" inputmode="decimal" id="m_w" placeholder="00.0">
         <span class="unit" id="m_w_note"></span>
@@ -209,20 +209,20 @@ details ul{padding-left:1.2em;margin:6px 0}
     </div>
 
     <div class="field">
-      <div class="lab">おきたときの だるさ <small>1＝スッキリ / 10＝とてもだるい</small></div>
+      <div class="lab">起きたときの だるさ <small>1＝スッキリ / 10＝とてもだるい</small></div>
       <div class="scale" id="m_fat"></div>
       <div class="ends"><span>スッキリ</span><span>とてもだるい</span></div>
     </div>
 
     <div class="field">
-      <div class="lab">起きて 立ったとき、くらっとした？ <small>ふとんから 出たとき</small></div>
+      <div class="lab">起きて 立ったとき、くらっとした？ <small>布団から 出たとき</small></div>
       <div class="scale s4" id="m_diz"></div>
-      <div class="ends"><span>1 なかった</span><span>4 目の前が くらくなった</span></div>
+      <div class="ends"><span>1 なかった</span><span>4 目の前が 暗くなった</span></div>
       <p class="hint" id="dizword" style="margin:6px 0 0"></p>
     </div>
 
     <div class="field">
-      <div class="lab">ねた時間</div>
+      <div class="lab">睡眠時間</div>
       <div class="numrow">
         <input type="number" step="0.5" inputmode="decimal" id="m_sleep" placeholder="9.0">
         <span class="unit">時間</span>
@@ -230,12 +230,12 @@ details ul{padding-left:1.2em;margin:6px 0}
     </div>
 
     <div class="field">
-      <div class="lab">ねむりの よさ <small>1＝ぐっすり / 5＝ねむれなかった</small></div>
+      <div class="lab">睡眠の 質 <small>1＝ぐっすり / 5＝眠れなかった</small></div>
       <div class="scale s5" id="m_sq"></div>
     </div>
 
     <div class="field">
-      <div class="lab">食よく <small>1＝ばっちり食べられる / 5＝食べられない</small></div>
+      <div class="lab">食欲 <small>1＝しっかり食べられる / 5＝食べられない</small></div>
       <div class="scale s5" id="m_app"></div>
     </div>
 
@@ -256,37 +256,37 @@ details ul{padding-left:1.2em;margin:6px 0}
       </div>
     </div>
     <div class="field">
-      <div class="lab">出かける前の つかれ <small>1〜10</small></div>
+      <div class="lab">出かける前の 疲れ <small>1〜10</small></div>
       <div class="scale" id="pre_fat"></div>
     </div>
   </div>
 
   <!-- 3. 練習・試合 -->
   <div class="card hide" id="c_sess">
-    <h2><span class="step">4</span>練習・試合 <span class="tag">おわるたびに ついか</span><span class="tag done hide" id="b_sess">入力ずみ ✓</span></h2>
-    <p class="hint">2部練やユースとかけもちの日は、1セッションごとに分けて入れよう。終わって30分たったら きつさを えらぼう。</p>
+    <h2><span class="step">4</span>練習・試合 <span class="tag">終わるたびに 追加</span><span class="tag done hide" id="b_sess">入力ずみ ✓</span></h2>
+    <p class="hint">2部練やユースと掛け持ちの日は、1セッションごとに分けて入力しよう。終わって30分たったら きつさを選ぼう。</p>
     <div id="sesslist"></div>
-    <button type="button" class="addsess" id="addsess">＋ セッションを ついか</button>
+    <button type="button" class="addsess" id="addsess">＋ セッションを 追加</button>
     <div class="daytotal" id="daytotal"></div>
   </div>
 
   <!-- 4. 帰ったあと -->
   <div class="card hide" id="c_home">
-    <h2><span class="step">5</span>ぜんぶ 終わって 帰ったあと <span class="tag done hide" id="b_home">入力ずみ ✓</span></h2>
-    <p class="hint">帰ってきたら、水を飲む前・おふろの前にはかろう。</p>
+    <h2><span class="step">5</span>全部 終わって 帰ったあと <span class="tag done hide" id="b_home">入力ずみ ✓</span></h2>
+    <p class="hint">帰ってきたら、水を飲む前・お風呂の前に測ろう。</p>
     <div class="field">
       <div class="lab">帰ったあとの 体重 <small>kg</small></div>
       <div class="numrow"><input type="number" step="0.1" inputmode="decimal" id="post_w" placeholder="00.0"></div>
     </div>
     <div class="field">
-      <div class="lab">出かけてから 飲んだ量 <small>だいたいでOK・任意</small></div>
+      <div class="lab">出かけてから 飲んだ量 <small>おおよそでOK・任意</small></div>
       <div class="numrow">
         <input type="number" step="0.1" inputmode="decimal" id="drink" placeholder="1.0">
         <span class="unit">L（リットル）</span>
       </div>
     </div>
     <div class="field">
-      <div class="lab">帰ったあとの つかれ <small>1〜10</small></div>
+      <div class="lab">帰ったあとの 疲れ <small>1〜10</small></div>
       <div class="scale" id="post_fat"></div>
     </div>
     <div class="calc" id="dehy">水分の 出入り：前後の体重を入れると計算されます</div>
@@ -294,14 +294,14 @@ details ul{padding-left:1.2em;margin:6px 0}
 
   <!-- 5. 夜 -->
   <div class="card">
-    <h2><span class="step" id="nightstep">6</span>夜 <span class="tag" id="nighttag">ねる前</span><span class="tag done hide" id="b_night">入力ずみ ✓</span></h2>
+    <h2><span class="step" id="nightstep">6</span>夜 <span class="tag" id="nighttag">寝る前</span><span class="tag done hide" id="b_night">入力ずみ ✓</span></h2>
     <div class="field">
-      <div class="lab">夜の つかれ <small>1〜10</small></div>
+      <div class="lab">夜の 疲れ <small>1〜10</small></div>
       <div class="scale" id="n_fat"></div>
     </div>
 
     <div class="field">
-      <div class="lab">きょう うんちは 出た？ <small>毎日きろくしよう</small></div>
+      <div class="lab">今日 うんちは 出た？</div>
       <div class="toggle sm" id="pooptoggle">
         <button type="button" data-v="1">出た</button>
         <button type="button" class="no" data-v="0">出なかった</button>
@@ -310,18 +310,18 @@ details ul{padding-left:1.2em;margin:6px 0}
     </div>
 
     <div class="field hide" id="pooptypefield">
-      <div class="lab">うんちの かたさ <small>1＝コロコロ / 3＝ちょうどよい / 5＝下痢</small></div>
+      <div class="lab">うんちの 固さ <small>1＝コロコロ / 3＝ちょうど良い / 5＝下痢</small></div>
       <div class="scale s5" id="poop_t"></div>
-      <div class="ends"><span>コロコロ・かたい</span><span>やわらかい・下痢</span></div>
+      <div class="ends"><span>コロコロ・固い</span><span>やわらかい・下痢</span></div>
     </div>
 
     <div class="field" id="actfield">
-      <div class="lab">練習のない日に からだを 動かした？</div>
+      <div class="lab">練習のない日に 体を 動かした？</div>
       <div class="numrow">
         <select id="act">
           <option value="0">ほとんど動いていない</option>
-          <option value="2">かるく動いた（さんぽ・外遊び）</option>
-          <option value="4">ふつうに動いた（プール・公園など）</option>
+          <option value="2">軽く動いた（散歩・外遊び）</option>
+          <option value="4">普通に動いた（プール・公園など）</option>
           <option value="6">たくさん動いた（長時間の運動）</option>
         </select>
         <input type="number" step="10" inputmode="numeric" id="actmin" placeholder="60">
@@ -333,13 +333,13 @@ details ul{padding-left:1.2em;margin:6px 0}
   <div class="card">
     <div class="field" style="margin-top:0">
       <div class="lab">メモ <small>けが・体調・気づいたこと（任意）</small></div>
-      <textarea id="memo" placeholder="ひざが少し痛い／あついのでバテた など"></textarea>
+      <textarea id="memo" placeholder="ひざが少し痛い／暑くてバテた など"></textarea>
     </div>
   </div>
 
   <div class="savebar">
-    <button id="save">この日の きろくを ほぞん</button>
-    <div class="msg" id="savemsg">入力するたびに 自動で ほぞんされます</div>
+    <button id="save">この日の 記録を 保存</button>
+    <div class="msg" id="savemsg">入力するたびに 自動で 保存されます</div>
   </div>
 
   <div class="card" id="todaysign"></div>
@@ -348,7 +348,7 @@ details ul{padding-left:1.2em;margin:6px 0}
 <!-- ============ グラフ ============ -->
 <section id="tab-graph" class="hide">
   <div class="card">
-    <h2>からだの 調子</h2>
+    <h2>体の 調子</h2>
     <div class="btns" id="range" style="margin-top:8px">
       <button data-r="14" class="p">14日</button>
       <button data-r="28">28日</button>
@@ -367,7 +367,7 @@ details ul{padding-left:1.2em;margin:6px 0}
     <table class="tbl" id="wtable"></table>
   </div>
   <div class="card">
-    <h2>おうちの人と いっしょに 見るポイント</h2>
+    <h2>おうちの人と 一緒に 見るポイント</h2>
     <details open>
       <summary>数字の読み方</summary>
       <ul>
@@ -381,7 +381,7 @@ details ul{padding-left:1.2em;margin:6px 0}
     </details>
   </div>
   <div class="card">
-    <h2>データの ほぞん・書き出し</h2>
+    <h2>データの 保存・書き出し</h2>
     <p class="hint">記録はこの端末の中だけに保存されます。ときどき書き出してバックアップを取ってください。</p>
     <div class="btns">
       <button class="p" id="ecsv">CSVで書き出す</button>
@@ -450,7 +450,7 @@ let cur = iso(new Date());
 /* ---------- scales ---------- */
 const FATCOL = n => `hsl(${Math.round(140 - (n-1)*15)} 62% ${n>=8?42:46}%)`;
 const S5COL  = n => `hsl(${Math.round(140 - (n-1)*33)} 62% 46%)`;
-const RPEWORD = {1:"とても楽",2:"楽",3:"ちょうどよい",4:"ややきつい",5:"きつい",
+const RPEWORD = {1:"とても楽",2:"楽",3:"ちょうど良い",4:"ややきつい",5:"きつい",
                  6:"かなりきつい",7:"とてもきつい",8:"とてもきつい＋",9:"ほぼ限界",10:"最高にきつい"};
 
 function makeScale(n, colorFn, value, onChange, cls){
@@ -482,7 +482,7 @@ buildScale("poop_t", 5, POOPCOL);
 /* 立ちくらみ 4段階 */
 const DIZCOL = n => ["hsl(150 55% 40%)","hsl(52 62% 42%)","hsl(28 72% 47%)","hsl(5 65% 50%)"][n-1];
 const DIZWORD = {1:"なかった", 2:"少し ふらっとした", 3:"はっきり くらっとした",
-                 4:"目の前が くらくなった／しゃがみこんだ"};
+                 4:"目の前が 暗くなった／しゃがみこんだ"};
 buildScale("m_diz", 4, DIZCOL);
 
 const getScale = id => { const s = $("#"+id).querySelector(".sel"); return s ? Number(s.dataset.v) : null; };
@@ -514,7 +514,7 @@ function renderSessions(){
   if(!SESS.length){
     const e = document.createElement("div");
     e.className = "empty";
-    e.textContent = "下の「＋ セッションを ついか」で 練習や試合を 入れよう。";
+    e.textContent = "下の「＋ セッションを 追加」で 練習や試合を 入力しよう。";
     list.appendChild(e);
   }
   SESS.forEach((s,i)=> list.appendChild(sessionCard(s,i)));
@@ -582,7 +582,7 @@ function sessionCard(s, i){
 
     const f2 = document.createElement("div");
     f2.className = "field";
-    f2.innerHTML = `<div class="lab">出た ピリオド数 <small>合計・半分だけ出たときは 0.5 きざみ</small></div>`;
+    f2.innerHTML = `<div class="lab">出場した ピリオド数 <small>合計。半分だけ出た試合は 0.5</small></div>`;
     const r2 = document.createElement("div"); r2.className="numrow";
     const pe = document.createElement("select");
     const o0=document.createElement("option"); o0.value=""; o0.textContent="えらぶ"; pe.appendChild(o0);
@@ -621,7 +621,7 @@ function sessionCard(s, i){
   const word = document.createElement("p");
   word.className = "hint"; word.style.margin = "6px 0 0";
   word.textContent = s.rpe ? (RPEWORD[s.rpe]||"") : "";
-  fr.innerHTML = `<div class="lab">どのくらい きつかった？ <small>終わって30分後に えらぼう</small></div>`;
+  fr.innerHTML = `<div class="lab">どのくらい きつかった？ <small>終わって30分後に 選ぼう</small></div>`;
   fr.appendChild(makeScale(10, FATCOL, s.rpe||null, v=>{
     s.rpe = v; word.textContent = v ? (RPEWORD[v]||"") : "";
     refresh(); autosave();
@@ -643,8 +643,8 @@ function updateDayTotal(){
   const el = $("#daytotal");
   if(!el) return;
   el.innerHTML = SESS.length
-    ? `きょうの 合計　<b>${total||"—"}</b> AU　（${SESS.length}セッション ／ 合計 ${mins} 分）`
-    : `きょうの 合計　<b>0</b> AU　（練習・試合なし）`;
+    ? `今日の 合計　<b>${total||"—"}</b> AU　（${SESS.length}セッション ／ 合計 ${mins} 分）`
+    : `今日の 合計　<b>0</b> AU　（練習・試合なし）`;
 }
 
 const newSession = () => {
@@ -659,7 +659,7 @@ $("#addsess").onclick = () => {
   if(lastCard && lastCard.scrollIntoView) lastCard.scrollIntoView({block:"center", behavior:"smooth"});
 };
 
-/* ---------- きょうは練習がある？ ---------- */
+/* ---------- 今日は練習がある？ ---------- */
 let practiceDay = null;   // null=未選択 / true=ある / false=ない
 
 function updateDayFlag(){
@@ -674,7 +674,7 @@ function setPractice(v, fromLoad){
   const on = (v === true);
   ["c_out","c_sess","c_home"].forEach(id => $("#"+id).classList.toggle("hide", !on));
   $("#actfield").classList.toggle("hide", v !== false);
-  $("#nighttag").textContent = on ? "ねる前（任意）" : "ねる前";
+  $("#nighttag").textContent = on ? "寝る前（任意）" : "寝る前";
   $("#nightstep").textContent = on ? "6" : "3";
   if(on && !SESS.length && !fromLoad){ SESS.push(newSession()); renderSessions(); }
   updateDayFlag();
@@ -709,7 +709,7 @@ function setPoop(v, fromLoad){
   for(let i=1;i<=14;i++){ const rr = DB[addDays(cur,-i)]; if(rr && rr.poop === false) before++; else break; }
   const streak = (v === false) ? before + 1 : 0;
   if(v === false && streak >= 2){
-    el.textContent = `${streak}日 つづけて 出ていません。` + (streak>=3 ? "水分と食事、休養をふやそう。" : "");
+    el.textContent = `${streak}日 続けて 出ていません。` + (streak>=3 ? "水分と食事、休養を増やそう。" : "");
     el.style.color = streak >= 3 ? "var(--red)" : "var(--amber2)";
   } else { el.textContent = ""; el.style.color = ""; }
   if(!fromLoad) autosave();
@@ -867,8 +867,8 @@ function saveDay(silent){
   if(empty){ delete DB[cur]; } else { DB[cur] = r; }
   save();
   const m = $("#savemsg");
-  if(silent){ m.textContent = "自動ほぞん " + stamp(); }
-  else { m.textContent = "ほぞんしました ✓"; setTimeout(()=>{ m.textContent = "自動ほぞん " + stamp(); }, 2200); }
+  if(silent){ m.textContent = "自動保存 " + stamp(); }
+  else { m.textContent = "保存しました ✓"; setTimeout(()=>{ m.textContent = "自動保存 " + stamp(); }, 2200); }
   updateBadges(); renderTodaySign(); renderGraph(); renderWeek();
 }
 $("#save").onclick = () => saveDay(false);
@@ -903,7 +903,7 @@ function loadDay(day){
   $("#actmin").value = r.actmin ?? "";
   $("#memo").value = r.memo ?? "";
   recalc(); updateBadges(); renderTodaySign();
-  $("#savemsg").textContent = DB[day] ? "きろく ほぞんずみ" : "入力するたびに 自動で ほぞんされます";
+  $("#savemsg").textContent = DB[day] ? "記録 保存ずみ" : "入力するたびに 自動で 保存されます";
   LOADING = false;
 }
 
@@ -946,7 +946,7 @@ function buildSigns(day){
       const rr = DB[addDays(day,-i)];
       if(rr && rr.mw && (rr.mw-base)/base*100 <= -2) low++; else break;
     }
-    if(low >= 2) out.push(["warn","!",`朝の体重が ふだん（${base.toFixed(1)}kg）より2%以上少ない日が${low}日続いています。水分・食事の回復が追いついていないかもしれません。`]);
+    if(low >= 2) out.push(["warn","!",`朝の体重が 普段（${base.toFixed(1)}kg）より2%以上少ない日が${low}日続いています。水分・食事の回復が追いついていないかもしれません。`]);
   }
   let dull = 0;
   for(let i=0;i<3;i++){ const rr = DB[addDays(day,-i)]; if(rr && rr.mfat >= 7) dull++; else break; }
@@ -978,25 +978,25 @@ function buildSigns(day){
 
   /* 排便 */
   const noPoop = daysSincePoop(day);
-  if(noPoop >= 5) out.push(["bad","!",`うんちが ${noPoop}日 出ていません。便秘が続いています。水分・食物せんい・休養を見直し、続くようなら受診を検討してください。`]);
+  if(noPoop >= 5) out.push(["bad","!",`うんちが ${noPoop}日 出ていません。便秘が続いています。水分・食物繊維・休養を見直し、続くようなら受診を検討してください。`]);
   else if(noPoop >= 3) out.push(["warn","!",`うんちが ${noPoop}日 出ていません。水分と食事、休養を意識しましょう。`]);
   else {
     let hard = 0;
     for(let i=0;i<7;i++){ const rr = DB[addDays(day,-i)]; if(rr && rr.poopt && rr.poopt <= 2) hard++; }
-    if(hard >= 4) out.push(["warn","!",`この1週間、かたい便の日が${hard}日あります。水分が足りていない可能性があります。`]);
+    if(hard >= 4) out.push(["warn","!",`この1週間、固い便の日が${hard}日あります。水分が足りていない可能性があります。`]);
   }
 
   /* 連続活動日 */
   let streak = 0;
   for(let i=0;i<10;i++){ const rr = DB[addDays(day,-i)]; if(rr && dayLoad(rr) > 0) streak++; else break; }
   if(streak >= 7) out.push(["bad","!",`${streak}日 連続で 練習・試合が続いています。完全に休む日を1日つくりましょう。`]);
-  else if(streak === 6) out.push(["warn","!","6日連続で活動しています。そろそろ休養日を。"]);
+  else if(streak === 6) out.push(["warn","!","6日連続で活動しています。そろそろ休養日を入れましょう。"]);
 
   const n = Object.keys(DB).length, lb = lastBackup();
   if(n >= 7 && (!lb || Date.now()-lb > 14*864e5))
     out.push(["warn","!","バックアップをしばらく取っていません。「まとめ」タブの〈バックアップ（JSON）〉で書き出しておきましょう。"]);
 
-  if(!out.length) out.push(["ok","✓","いまのところ、気になるサインは出ていません。"]);
+  if(!out.length) out.push(["ok","✓","今のところ、気になるサインは出ていません。"]);
   return out;
 }
 function renderSigns(el, day){
@@ -1007,7 +1007,7 @@ function renderTodaySign(){
   const el = $("#todaysign");
   if(!DB[cur]){ el.classList.add("hide"); return; }
   el.classList.remove("hide");
-  el.innerHTML = "<h2>いまの サイン</h2>";
+  el.innerHTML = "<h2>今の サイン</h2>";
   const box = document.createElement("div");
   renderSigns(box, cur);
   el.appendChild(box);
@@ -1089,7 +1089,7 @@ function renderGraph(){
     { t:"朝の だるさ", s:"低いほど回復できている（1〜10）",
       html: lineChart(series(end,n,r=>r&&r.mfat||null), {min:1,max:10,ticks:[1,5,10],color:"#1f6feb",
         bands:[{from:7,to:10,color:"#fdecec"}]}) },
-    { t:"朝の 体重", s:"ふだんより2%以上減った日が続くと注意",
+    { t:"朝の 体重", s:"普段より2%以上減った日が続くと注意",
       html: lineChart(series(end,n,r=>r&&r.mw||null), {color:"#1e9e6a",fmt:t=>t.toFixed(1)}) },
     { t:"1日の 運動量（AU）", s:"オレンジは試合の日／赤は練習日",
       html: barChart(series(end,n,(r,d)=>dayLoad(r)).map(p=>{
@@ -1106,8 +1106,8 @@ function renderGraph(){
         bands:[{from:3,to:4,color:"#fdecec"}]}) },
     { t:"うんちが 出た日", s:"オレンジが続くと便秘のサイン",
       html: stripChart(series(end,n,r=>(r && r.poop !== undefined) ? r.poop : null),
-            [["#2e8b57","出た"],["#d98c2b","出なかった"],["#e6ebf1","きろくなし"]]) },
-    { t:"ねた時間", s:"9〜11時間が目安",
+            [["#2e8b57","出た"],["#d98c2b","出なかった"],["#e6ebf1","記録なし"]]) },
+    { t:"睡眠時間", s:"9〜11時間が目安",
       html: lineChart(series(end,n,r=>r&&r.sleep||null), {min:5,max:12,ticks:[6,9,12],color:"#7b5ea7",
         bands:[{from:9,to:11,color:"#eaf7f0"}]}) },
     { t:"気分・やる気", s:"1が良い状態（1〜5）",
@@ -1142,9 +1142,9 @@ function renderWeek(){
   const kpi = (k,v,n,col) => `<div class="kpi"><div class="k">${k}</div><div class="v" ${col?`style="color:${col}"`:""}>${v}</div><div class="n">${n}</div></div>`;
   $("#kpis").innerHTML = [
     kpi("今週の 運動量", w1 ? w1.toLocaleString()+" <small>AU</small>" : "—", `${sessN}セッション（うち試合${gameN}）／ ${mins}分`),
-    kpi("前の週と くらべて", chg===null?"—":(chg>=0?"+":"")+Math.round(chg)+" <small>%</small>",
+    kpi("前の週と 比べて", chg===null?"—":(chg>=0?"+":"")+Math.round(chg)+" <small>%</small>",
         "+30%を超えたら注意", chg!==null&&chg>30?"var(--red)":""),
-    kpi("急性:慢性比", acwr===null?"—":acwr.toFixed(2), acwr===null?"3週間分たまると出ます":"0.8〜1.3が目安",
+    kpi("急性:慢性比", acwr===null?"—":acwr.toFixed(2), acwr===null?"3週間分たまると表示されます":"0.8〜1.3が目安",
         acwr!==null&&(acwr>1.5||acwr<0.6)?"var(--red)":""),
     kpi("活動した日", actDays+" <small>日</small>", "7日のうち　休養日 "+(7-actDays)+"日",
         actDays>=7?"var(--red)":""),
@@ -1158,7 +1158,7 @@ function renderWeek(){
         daysSincePoop(end) >= 3 ? daysSincePoop(end)+"日 出ていません" : "毎日出るのが理想",
         daysSincePoop(end) >= 3 ? "var(--red)" : ""),
     kpi("朝の だるさ 平均", mf===null?"—":mf.toFixed(1), "1〜10（低いほど良い）", mf!==null&&mf>=6?"var(--red)":""),
-    kpi("ねた時間 平均", sl===null?"—":sl.toFixed(1)+" <small>時間</small>", "9〜11時間が目安", sl!==null&&sl<9?"var(--amber2)":""),
+    kpi("睡眠時間 平均", sl===null?"—":sl.toFixed(1)+" <small>時間</small>", "9〜11時間が目安", sl!==null&&sl<9?"var(--amber2)":""),
   ].join("");
 
   let rows = `<tr><th>日</th><th>だるさ</th><th>体重</th><th>睡眠</th><th>回数</th><th>分</th><th>AU</th><th>水分</th></tr>`;
