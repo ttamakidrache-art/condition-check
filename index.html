@@ -48,6 +48,7 @@ main{padding:14px 12px 40px;max-width:820px;margin:0 auto}
 .card h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
 .card h2 .tag{font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--soft);color:var(--blue-d)}
 .card h2 .tag.opt{background:#f0f0f0;color:#888}
+.card h2 .tag.done{background:#e9f7f0;color:#14684a;margin-left:auto}
 .hint{font-size:12.5px;color:var(--sub);margin:2px 0 10px}
 .field{margin:14px 0 0}
 .field:first-of-type{margin-top:10px}
@@ -160,7 +161,7 @@ details ul{padding-left:1.2em;margin:6px 0}
   </div>
 
   <div class="card">
-    <h2>朝 おきたとき <span class="tag">まいにち</span></h2>
+    <h2>朝 おきたとき <span class="tag">まいにち</span><span class="tag done hide" id="b_m">入力ずみ ✓</span></h2>
     <p class="hint">トイレのあと・ごはんの前に、いつも同じ条件ではかろう。</p>
 
     <div class="field">
@@ -203,7 +204,7 @@ details ul{padding-left:1.2em;margin:6px 0}
 
   <div id="pblock">
     <div class="card">
-      <h2>練習の 前 <span class="tag">出かける前</span></h2>
+      <h2>練習の 前 <span class="tag">出かける前</span><span class="tag done hide" id="b_pre">入力ずみ ✓</span></h2>
       <p class="hint">家を出る前にはかる。朝の体重を入れていれば、そのままでもOK。</p>
       <div class="field">
         <div class="lab">練習前の 体重 <small>kg</small></div>
@@ -219,7 +220,7 @@ details ul{padding-left:1.2em;margin:6px 0}
     </div>
 
     <div class="card">
-      <h2>練習の あと <span class="tag">帰ってすぐ</span></h2>
+      <h2>練習の あと <span class="tag">帰ってすぐ</span><span class="tag done hide" id="b_post">入力ずみ ✓</span></h2>
       <p class="hint">帰ってきたら、水を飲む前・おふろの前にはかろう。</p>
       <div class="field">
         <div class="lab">練習後の 体重 <small>kg</small></div>
@@ -240,7 +241,7 @@ details ul{padding-left:1.2em;margin:6px 0}
     </div>
 
     <div class="card">
-      <h2>練習の きつさ（RPE） <span class="tag">終わって30分後</span></h2>
+      <h2>練習の きつさ（RPE） <span class="tag">終わって30分後</span><span class="tag done hide" id="b_rpe">入力ずみ ✓</span></h2>
       <p class="hint">終わってすぐだと高めに答えがち。少し落ち着いてから答えよう。</p>
       <div class="field">
         <div class="lab">今日の練習は どのくらい きつかった？</div>
@@ -261,7 +262,7 @@ details ul{padding-left:1.2em;margin:6px 0}
 
   <div id="nblock">
     <div class="card">
-      <h2>夜 <span class="tag" id="nighttag">練習のない日</span></h2>
+      <h2>夜 <span class="tag" id="nighttag">練習のない日</span><span class="tag done hide" id="b_night">入力ずみ ✓</span></h2>
       <div class="field">
         <div class="lab">夜の つかれ <small>1〜10</small></div>
         <div class="scale" id="n_fat"></div>
@@ -291,7 +292,7 @@ details ul{padding-left:1.2em;margin:6px 0}
 
   <div class="savebar">
     <button id="save">この日の きろくを ほぞん</button>
-    <div class="msg" id="savemsg"></div>
+    <div class="msg" id="savemsg">入力するたびに 自動で ほぞんされます</div>
   </div>
 
   <div class="card" id="todaysign"></div>
@@ -401,7 +402,7 @@ function buildScale(id, n, colorFn){
       Array.from(el.children).forEach(c=>{c.classList.remove("sel");c.style.background="";});
       if(!already){ b.classList.add("sel"); b.style.background = colorFn(i); }
       if(id==="rpe") $("#rpeword").textContent = already ? "" : (RPEWORD[i]||"");
-      recalc();
+      recalc(); autosave();
     };
     el.appendChild(b);
   }
@@ -433,7 +434,7 @@ function setPractice(p){
   $("#dayflag").textContent = practice ? "練習日" : "休みの日";
   recalc();
 }
-$$("#ptoggle button").forEach(b=> b.onclick = ()=> setPractice(Number(b.dataset.p)));
+$$("#ptoggle button").forEach(b=> b.onclick = ()=>{ setPractice(Number(b.dataset.p)); autosave(); });
 
 /* ---------- computed values ---------- */
 const num = id => { const v = parseFloat($("#"+id).value); return isFinite(v) ? v : null; };
@@ -474,8 +475,10 @@ function recalc(){
     note.style.color = diff <= -2 ? "var(--red)" : "var(--sub)";
   } else note.textContent = "";
 }
-["pre_w","post_w","drink","pmin","m_w"].forEach(id => $("#"+id).addEventListener("input", recalc));
-$("#copyw").onclick = () => { const w = num("m_w"); if(w){ $("#pre_w").value = w; recalc(); } };
+["pre_w","post_w","drink","pmin","m_w"].forEach(id => $("#"+id).addEventListener("input", ()=>{ recalc(); autosave(); }));
+["m_sleep","actmin","memo"].forEach(id => $("#"+id).addEventListener("input", autosave));
+$("#act").addEventListener("change", autosave);
+$("#copyw").onclick = () => { const w = num("m_w"); if(w){ $("#pre_w").value = w; recalc(); autosave(); } };
 
 /* baseline = 直近14日（当日を除く）の朝体重の中央値 */
 function baseline(day){
@@ -492,6 +495,8 @@ function baseline(day){
 
 /* ---------- load / save a day ---------- */
 function loadDay(day){
+  LOADING = true;
+  clearTimeout(saveTimer);
   cur = day;
   $("#date").value = day;
   const r = DB[day] || {};
@@ -514,9 +519,34 @@ function loadDay(day){
   $("#actmin").value = r.actmin ?? "";
   $("#memo").value = r.memo ?? "";
   recalc();
+  updateBadges();
   renderTodaySign();
+  $("#savemsg").textContent = DB[day] ? "きろく ほぞんずみ" : "入力するたびに 自動で ほぞんされます";
+  LOADING = false;
 }
-function saveDay(){
+/* ---------- 自動保存 ---------- */
+let LOADING = false, saveTimer = null;
+function autosave(){
+  if(LOADING) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>saveDay(true), 600);
+}
+function stamp(){
+  const d = new Date();
+  return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+}
+function updateBadges(){
+  const r = DB[cur] || {};
+  const has = (...ks) => ks.some(k => r[k] !== null && r[k] !== undefined && r[k] !== "");
+  const set = (id, ok) => { const e = $("#"+id); if(e) e.classList.toggle("hide", !ok); };
+  set("b_m",     has("mw","mfat","sleep","sq","app","mood"));
+  set("b_pre",   has("prew","prefat"));
+  set("b_post",  has("postw","postfat","drink"));
+  set("b_rpe",   has("rpe","min"));
+  set("b_night", has("nfat","actmin"));
+}
+
+function saveDay(silent){
   const r = {
     practice: practice,
     mw: num("m_w"), sleep: num("m_sleep"),
@@ -532,12 +562,28 @@ function saveDay(){
   if(empty){ delete DB[cur]; } else { DB[cur] = r; }
   save();
   const m = $("#savemsg");
-  m.textContent = "ほぞんしました ✓";
-  setTimeout(()=>{ m.textContent=""; }, 2200);
-  renderTodaySign(); renderGraph(); renderWeek();
+  if(silent){
+    m.textContent = "自動ほぞん " + stamp();
+  } else {
+    m.textContent = "ほぞんしました ✓";
+    setTimeout(()=>{ m.textContent = "自動ほぞん " + stamp(); }, 2200);
+  }
+  updateBadges(); renderTodaySign(); renderGraph(); renderWeek();
 }
-$("#save").onclick = saveDay;
-$("#date").onchange = e => loadDay(e.target.value);
+$("#save").onclick = () => saveDay(false);
+
+/* 日付を手で変えたら自動追従をやめる */
+let autoDate = true;
+$("#date").onchange = e => { autoDate = false; loadDay(e.target.value); };
+
+/* アプリを開きっぱなしで日付をまたいだとき、今日のカードに切り替える */
+function rollDate(){
+  const t = iso(new Date());
+  if(autoDate && t !== cur){ loadDay(t); }
+}
+window.addEventListener("pageshow", rollDate);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) rollDate(); });
+window.addEventListener("focus", rollDate);
 
 /* ---------- derived series ---------- */
 function dayLoad(r){
