@@ -586,12 +586,12 @@ function updateDayTotal(){
 }
 
 $("#addsess").onclick = () => {
-  const last = SESS[SESS.length-1];
-  SESS.push({ t: last ? last.t : "minibas", min:null, rpe:null, pmin:null, per:null, games:null });
+  const prev = SESS[SESS.length-1];
+  SESS.push({ t: prev ? prev.t : "minibas", min:null, rpe:null, pmin:null, per:null, games:null });
   renderSessions(); autosave();
   const cards = $("#sesslist").querySelectorAll(".sess");
-  const last = cards[cards.length-1];
-  if(last && last.scrollIntoView) last.scrollIntoView({block:"center", behavior:"smooth"});
+  const lastCard = cards[cards.length-1];
+  if(lastCard && lastCard.scrollIntoView) lastCard.scrollIntoView({block:"center", behavior:"smooth"});
 };
 
 /* ---------- 計算 ---------- */
